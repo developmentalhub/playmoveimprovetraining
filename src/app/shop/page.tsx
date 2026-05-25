@@ -115,28 +115,6 @@ export default function ShopPage() {
   return (
     <div className="min-h-screen" style={{backgroundColor: '#f8fffe'}}>
 
-      {/* Header */}
-      <div style={{backgroundColor: '#4ABFB0'}} className="shadow-md">
-        <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-          <div>
-            <h1 className="text-2xl font-bold text-white">Play Move Improve</h1>
-            <p className="text-sm" style={{color: '#e0f7f5'}}>The Developmental Hub</p>
-          </div>
-          <button
-            onClick={() => setCartOpen(!cartOpen)}
-            className="bg-white px-4 py-2 rounded-full font-semibold shadow"
-            style={{color: '#7B4FA6'}}
-          >
-            Cart ({cart.length})
-            {cart.length > 0 && (
-              <span className="ml-2 font-bold">
-                — A${(total / 100).toFixed(2)}
-              </span>
-            )}
-          </button>
-        </div>
-      </div>
-
       {/* Cart Dropdown */}
       {cartOpen && (
         <div className="max-w-6xl mx-auto px-6">
