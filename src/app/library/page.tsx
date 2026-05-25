@@ -27,20 +27,16 @@ export default function LibraryPage() {
   useEffect(() => {
     async function fetchLibrary() {
       const { data: { user } } = await supabase.auth.getUser()
-
       if (!user) {
         window.location.href = '/login'
         return
       }
-
       setUser(user)
-
       const { data } = await supabase
         .from('purchases')
         .select('*, videos(*)')
         .eq('user_id', user.id)
         .order('created_at', { ascending: false })
-
       setPurchases(data || [])
       setLoading(false)
     }
@@ -59,8 +55,6 @@ export default function LibraryPage() {
   return (
     <div className="min-h-screen" style={{backgroundColor: '#f8fffe'}}>
       <div className="max-w-6xl mx-auto px-6 py-10">
-
-        {/* Welcome */}
         <div className="mb-8">
           <h2 className="text-3xl font-bold mb-1" style={{color: '#1a2e44'}}>
             My Video Library
@@ -82,26 +76,19 @@ export default function LibraryPage() {
             <p className="mb-6" style={{color: '#4a5568'}}>
               Browse our resources and find the right support for your child.
             </p>
-            <Link
-              href="/shop"
-              className="text-white px-6 py-3 rounded-full font-semibold"
-              style={{backgroundColor: '#4ABFB0'}}
-            >
+            <Link href="/shop"
+                  className="text-white px-6 py-3 rounded-full font-semibold"
+                  style={{backgroundColor: '#4ABFB0'}}>
               Browse Videos
             </Link>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {purchases.map(purchase => (
-              <div
-                key={purchase.id}
-                className="bg-white rounded-2xl shadow-md overflow-hidden border-2"
-                style={{
-                  borderColor: activeVideo === purchase.videos?.bunny_video_id
-                    ? '#7B4FA6' : 'transparent'
-                }}
-              >
-                {/* Video Player */}
+              <div key={purchase.id}
+                   className="bg-white rounded-2xl shadow-md overflow-hidden border-2"
+                   style={{borderColor: activeVideo === purchase.videos?.bunny_video_id ? '#7B4FA6' : 'transparent'}}>
+
                 {activeVideo === purchase.videos?.bunny_video_id ? (
                   <div className="w-full aspect-video bg-black">
                     <iframe
@@ -112,17 +99,12 @@ export default function LibraryPage() {
                     />
                   </div>
                 ) : (
-                  <div
-                    className="w-full h-40 flex items-center justify-center cursor-pointer"
-                    style={{backgroundColor: '#e0f7f5'}}
-                    onClick={() => setActiveVideo(purchase.videos?.bunny_video_id)}
-                  >
-                    <div
-                      className="w-14 h-14 rounded-full flex items-center justify-center shadow-lg"
-                      style={{backgroundColor: '#4ABFB0'}}
-                    >
-                      <svg className="w-6 h-6 text-white ml-1" fill="currentColor"
-                           viewBox="0 0 24 24">
+                  <div className="w-full h-40 flex items-center justify-center cursor-pointer"
+                       style={{backgroundColor: '#e0f7f5'}}
+                       onClick={() => setActiveVideo(purchase.videos?.bunny_video_id)}>
+                    <div className="w-14 h-14 rounded-full flex items-center justify-center shadow-lg"
+                         style={{backgroundColor: '#4ABFB0'}}>
+                      <svg className="w-6 h-6 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M8 5v14l11-7z"/>
                       </svg>
                     </div>
@@ -130,10 +112,8 @@ export default function LibraryPage() {
                 )}
 
                 <div className="p-4">
-                  <span
-                    className="text-xs font-bold px-2 py-1 rounded-full text-white"
-                    style={{backgroundColor: '#4ABFB0'}}
-                  >
+                  <span className="text-xs font-bold px-2 py-1 rounded-full text-white"
+                        style={{backgroundColor: '#4ABFB0'}}>
                     {purchase.videos?.category}
                   </span>
                   <h4 className="font-bold mt-2" style={{color: '#1a2e44'}}>
@@ -142,30 +122,22 @@ export default function LibraryPage() {
                   <p className="text-xs mt-1" style={{color: '#4a5568'}}>
                     {purchase.videos?.description}
                   </p>
-
                   <div className="mt-3 flex gap-2 flex-wrap">
                     <button
                       onClick={() => setActiveVideo(
                         activeVideo === purchase.videos?.bunny_video_id
-                          ? null
-                          : purchase.videos?.bunny_video_id
+                          ? null : purchase.videos?.bunny_video_id
                       )}
                       className="text-sm font-semibold px-4 py-1 rounded-full text-white"
-                      style={{backgroundColor: '#7B4FA6'}}
-                    >
-                      {activeVideo === purchase.videos?.bunny_video_id
-                        ? 'Close video'
-                        : 'Watch now'}
+                      style={{backgroundColor: '#7B4FA6'}}>
+                      {activeVideo === purchase.videos?.bunny_video_id ? 'Close video' : 'Watch now'}
                     </button>
-
                     {purchase.videos?.printable_url && (
-                      
-                        href={purchase.videos.printable_url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-sm font-semibold px-4 py-1 rounded-full border-2"
-                        style={{borderColor: '#4ABFB0', color: '#4ABFB0'}}
-                      >
+                      <a href={purchase.videos.printable_url}
+                         target="_blank"
+                         rel="noopener noreferrer"
+                         className="text-sm font-semibold px-4 py-1 rounded-full border-2"
+                         style={{borderColor: '#4ABFB0', color: '#4ABFB0'}}>
                         Download Printable
                       </a>
                     )}
