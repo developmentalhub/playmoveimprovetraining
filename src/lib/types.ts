@@ -7,7 +7,8 @@ export type Video = {
   price_cents: number
   category: string
   age_group: string
-  printable_url: string
+  printable_url: string | null
+  is_membership: boolean
   created_at: string
 }
 
