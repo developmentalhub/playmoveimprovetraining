@@ -21,7 +21,7 @@ export default function LoginPage() {
         email,
         password,
         options: {
-          emailRedirectTo: `${window.location.origin}/auth/callback`,
+          emailRedirectTo: `https://www.playmoveimprove.com/auth/callback`,
         },
       })
       if (error) setError(error.message)
