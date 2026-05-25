@@ -63,28 +63,6 @@ export default function LibraryPage() {
   return (
     <div className="min-h-screen" style={{backgroundColor: '#f8fffe'}}>
 
-      {/* Header */}
-      <div style={{backgroundColor: '#4ABFB0'}} className="shadow-md">
-        <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-          <div>
-            <h1 className="text-2xl font-bold text-white">Play Move Improve</h1>
-            <p className="text-sm" style={{color: '#e0f7f5'}}>The Developmental Hub</p>
-          </div>
-          <div className="flex items-center gap-4">
-            <Link href="/shop"
-                  className="bg-white px-4 py-2 rounded-full font-semibold text-sm shadow"
-                  style={{color: '#4ABFB0'}}>
-              Browse Videos
-            </Link>
-            <button
-              onClick={handleSignOut}
-              className="text-white text-sm font-semibold underline">
-              Sign out
-            </button>
-          </div>
-        </div>
-      </div>
-
       <div className="max-w-6xl mx-auto px-6 py-10">
 
         {/* Welcome */}
