@@ -1,4 +1,5 @@
-import type { Metadata } from 'next'
+﻿f = open('src/app/layout.tsx', 'w', encoding='utf-8')
+f.write("""import type { Metadata } from 'next'
 import './globals.css'
 import Navbar from '@/components/Navbar'
 import AuthRedirectHandler from '@/components/AuthRedirectHandler'
@@ -19,3 +20,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     </html>
   )
 }
+""")
+f.close()
+print('done')

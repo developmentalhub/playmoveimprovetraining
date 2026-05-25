@@ -1,4 +1,5 @@
-'use client'
+﻿f = open('src/app/reset-password/page.tsx', 'w', encoding='utf-8')
+f.write("""'use client'
 import { useState, useEffect } from 'react'
 import { supabase } from '@/lib/supabase'
 
@@ -63,3 +64,6 @@ export default function ResetPasswordPage() {
     </div>
   )
 }
+""")
+f.close()
+print('done')
