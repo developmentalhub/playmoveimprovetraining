@@ -88,15 +88,25 @@ export default function ShopPage() {
     return cart.some(c => c.id === id)
   }
 
-  async function handleCheckout() {
-    const res = await fetch('/api/checkout', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ cartItems: cart }),
-    })
-    const { url } = await res.json()
-    window.location.href = url
+async function handleCheckout() {
+  const { data: { session } } = await supabase.auth.getSession()
+  
+  if (!session) {
+    window.location.href = '/login'
+    return
   }
+
+  const res = await fetch('/api/checkout', {
+    method: 'POST',
+    headers: { 
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${session.access_token}`
+    },
+    body: JSON.stringify({ cartItems: cart }),
+  })
+  const { url } = await res.json()
+  window.location.href = url
+}
 
   const total = cart.reduce((sum, c) => sum + c.price_cents, 0)
 
