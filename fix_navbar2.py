@@ -1,4 +1,5 @@
-'use client'
+﻿f = open('src/components/Navbar.tsx', 'w', encoding='utf-8')
+f.write("""'use client'
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { supabase } from '@/lib/supabase'
@@ -102,3 +103,6 @@ export default function Navbar() {
     </div>
   )
 }
+""")
+f.close()
+print('done')
