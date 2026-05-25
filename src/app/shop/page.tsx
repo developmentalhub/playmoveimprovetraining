@@ -130,7 +130,7 @@ export default function ShopPage() {
           <button
             onClick={() => setCartOpen(!cartOpen)}
             className="bg-white px-4 py-2 rounded-full font-semibold shadow"
-            style={{color: '#4ABFB0'}}
+            style={{color: '#7B4FA6'}}
           >
             Cart ({cart.length})
             {cart.length > 0 && (
@@ -145,9 +145,11 @@ export default function ShopPage() {
       {/* Cart Dropdown */}
       {cartOpen && (
         <div className="max-w-6xl mx-auto px-6">
-          <div className="bg-white rounded-xl shadow-lg p-6 mt-2 border"
-               style={{borderColor: '#4ABFB0'}}>
-            <h3 className="font-bold text-lg text-gray-800 mb-4">Your Cart</h3>
+          <div className="bg-white rounded-xl shadow-lg p-6 mt-2 border-2"
+               style={{borderColor: '#7B4FA6'}}>
+            <h3 className="font-bold text-lg mb-4" style={{color: '#1a2e44'}}>
+              Your Cart
+            </h3>
             {cart.length === 0 ? (
               <p className="text-gray-500">No items yet</p>
             ) : (
@@ -156,13 +158,15 @@ export default function ShopPage() {
                   <div key={item.id}
                        className="flex justify-between items-center py-2 border-b">
                     <div>
-                      <p className="font-medium text-gray-800">{item.title}</p>
+                      <p className="font-medium" style={{color: '#1a2e44'}}>
+                        {item.title}
+                      </p>
                       <p className="text-sm text-gray-500">
                         {item.type === 'bundle' ? 'Bundle' : 'Single video'}
                       </p>
                     </div>
                     <div className="flex items-center gap-3">
-                      <span className="font-bold" style={{color: '#4ABFB0'}}>
+                      <span className="font-bold" style={{color: '#7B4FA6'}}>
                         A${(item.price_cents / 100).toFixed(2)}
                       </span>
                       <button
@@ -175,13 +179,13 @@ export default function ShopPage() {
                   </div>
                 ))}
                 <div className="flex justify-between items-center mt-4">
-                  <span className="font-bold text-gray-800 text-lg">
+                  <span className="font-bold text-lg" style={{color: '#1a2e44'}}>
                     Total: A${(total / 100).toFixed(2)}
                   </span>
                   <button
                     onClick={handleCheckout}
                     className="text-white px-6 py-2 rounded-full font-semibold shadow"
-                    style={{backgroundColor: '#4ABFB0'}}
+                    style={{backgroundColor: '#7B4FA6'}}
                   >
                     Checkout
                   </button>
@@ -195,12 +199,12 @@ export default function ShopPage() {
       {/* Hero */}
       <div style={{backgroundColor: '#e0f7f5'}} className="py-12">
         <div className="max-w-6xl mx-auto px-6">
-          <h2 className="text-4xl font-bold text-gray-900 mb-3">
+          <h2 className="text-4xl font-bold mb-3" style={{color: '#1a2e44'}}>
             What does your child need help with?
           </h2>
-          <p className="text-gray-600 text-lg max-w-2xl">
-            Select an area below to find targeted video activities designed by 
-            child development specialists. Buy individual videos for A$5, 
+          <p className="text-lg max-w-2xl" style={{color: '#4a5568'}}>
+            Select an area below to find targeted video activities designed by
+            child development specialists. Buy individual videos for A$5,
             or get a full bundle of 10 videos for A$39.
           </p>
         </div>
@@ -217,33 +221,33 @@ export default function ShopPage() {
               )}
               className="text-left rounded-2xl overflow-hidden shadow-md transition-all hover:shadow-lg border-2"
               style={{
-                borderColor: activeCategory === cat.key ? '#4ABFB0' : 'transparent',
+                borderColor: activeCategory === cat.key ? '#7B4FA6' : 'transparent',
                 backgroundColor: 'white',
               }}
             >
-              {/* Image placeholder — replace src with Adobe Firefly image */}
+              {/* Image area — replace with Adobe Firefly image */}
               <div
-                className="w-full h-48 flex items-end p-4"
-                style={{backgroundColor: '#4ABFB0'}}
-              >
-                {cat.image && (
-                  <img src={cat.image} alt={cat.heading}
-                       className="w-full h-full object-cover absolute inset-0" />
-                )}
-              </div>
+                className="w-full h-48"
+                style={{
+                  backgroundColor: activeCategory === cat.key ? '#7B4FA6' : '#4ABFB0'
+                }}
+              />
               <div className="p-5">
-                <h3 className="font-bold text-gray-900 text-lg leading-snug mb-2">
+                <h3 className="font-bold text-lg leading-snug mb-2"
+                    style={{color: '#1a2e44'}}>
                   {cat.heading}
                 </h3>
-                <p className="text-sm text-gray-600">{cat.subheading}</p>
-                <div className="mt-4">
-                  <span
-                    className="text-sm font-semibold px-4 py-1 rounded-full text-white"
-                    style={{backgroundColor: '#4ABFB0'}}
-                  >
-                    {activeCategory === cat.key ? 'Hide videos' : 'See videos'}
-                  </span>
-                </div>
+                <p className="text-sm mb-4" style={{color: '#4a5568'}}>
+                  {cat.subheading}
+                </p>
+                <span
+                  className="text-sm font-semibold px-4 py-1 rounded-full text-white"
+                  style={{
+                    backgroundColor: activeCategory === cat.key ? '#7B4FA6' : '#4ABFB0'
+                  }}
+                >
+                  {activeCategory === cat.key ? 'Hide videos' : 'See videos'}
+                </span>
               </div>
             </button>
           ))}
@@ -253,16 +257,16 @@ export default function ShopPage() {
       {/* Videos for selected category */}
       {activeCategory && (
         <div className="max-w-6xl mx-auto px-6 pb-16">
-          <div style={{backgroundColor: '#e0f7f5'}}
-               className="rounded-2xl p-8">
+          <div className="rounded-2xl p-8 border-2"
+               style={{backgroundColor: '#f3eeff', borderColor: '#7B4FA6'}}>
 
             {/* Bundles */}
             {activeBundles.length > 0 && (
               <div className="mb-10">
-                <h3 className="text-xl font-bold text-gray-900 mb-2">
+                <h3 className="text-xl font-bold mb-1" style={{color: '#1a2e44'}}>
                   Full Bundle
                 </h3>
-                <p className="text-gray-600 mb-6">
+                <p className="mb-6" style={{color: '#4a5568'}}>
                   Get all 10 videos in this topic for A$39 — saving A$11 compared to buying individually.
                 </p>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -278,16 +282,17 @@ export default function ShopPage() {
                               style={{backgroundColor: '#4ABFB0'}}>
                           {bundle.age_group}
                         </span>
-                        <h4 className="font-bold text-gray-900 text-lg mt-3">
+                        <h4 className="font-bold text-lg mt-3"
+                            style={{color: '#1a2e44'}}>
                           {bundle.title}
                         </h4>
-                        <p className="text-sm text-gray-600 mt-1 mb-4">
+                        <p className="text-sm mt-1 mb-4" style={{color: '#4a5568'}}>
                           {bundle.description}
                         </p>
                         <div className="flex justify-between items-center">
                           <div>
                             <span className="text-2xl font-bold"
-                                  style={{color: '#4ABFB0'}}>
+                                  style={{color: '#7B4FA6'}}>
                               A$39
                             </span>
                             <span className="text-xs text-gray-400 ml-1">
@@ -303,7 +308,7 @@ export default function ShopPage() {
                             })}
                             className="px-5 py-2 rounded-full text-sm font-semibold text-white"
                             style={{
-                              backgroundColor: inCart(bundle.id) ? '#9ca3af' : '#4ABFB0'
+                              backgroundColor: inCart(bundle.id) ? '#9ca3af' : '#7B4FA6'
                             }}
                             disabled={inCart(bundle.id)}
                           >
@@ -320,10 +325,10 @@ export default function ShopPage() {
             {/* Individual Videos */}
             {activeVideos.length > 0 && (
               <div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2">
+                <h3 className="text-xl font-bold mb-1" style={{color: '#1a2e44'}}>
                   Individual Videos
                 </h3>
-                <p className="text-gray-600 mb-6">
+                <p className="mb-6" style={{color: '#4a5568'}}>
                   Prefer to start with just one or two? Pick exactly what you need for A$5 each.
                 </p>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -335,14 +340,14 @@ export default function ShopPage() {
                              className="w-full h-36 object-cover" />
                       )}
                       <div className="p-4">
-                        <h4 className="font-semibold text-gray-900 text-sm">
+                        <h4 className="font-semibold text-sm" style={{color: '#1a2e44'}}>
                           {video.title}
                         </h4>
-                        <p className="text-xs text-gray-500 mt-1 mb-3">
+                        <p className="text-xs mt-1 mb-3" style={{color: '#4a5568'}}>
                           {video.description}
                         </p>
                         <div className="flex justify-between items-center">
-                          <span className="font-bold" style={{color: '#4ABFB0'}}>
+                          <span className="font-bold" style={{color: '#7B4FA6'}}>
                             A$5
                           </span>
                           <button
@@ -369,7 +374,7 @@ export default function ShopPage() {
             )}
 
             {activeBundles.length === 0 && activeVideos.length === 0 && (
-              <p className="text-gray-500 text-center py-8">
+              <p className="text-center py-8" style={{color: '#4a5568'}}>
                 Videos coming soon for this topic.
               </p>
             )}
