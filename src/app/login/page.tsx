@@ -40,21 +40,6 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen flex flex-col" style={{backgroundColor: '#f8fffe'}}>
 
-      {/* Header */}
-      <div style={{backgroundColor: '#4ABFB0'}} className="shadow-md">
-        <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-          <div>
-            <h1 className="text-2xl font-bold text-white">Play Move Improve</h1>
-            <p className="text-sm" style={{color: '#e0f7f5'}}>The Developmental Hub</p>
-          </div>
-          <Link href="/shop"
-                className="bg-white px-4 py-2 rounded-full font-semibold text-sm shadow"
-                style={{color: '#4ABFB0'}}>
-            Browse Videos
-          </Link>
-        </div>
-      </div>
-
       {/* Form */}
       <div className="flex-1 flex items-center justify-center px-6 py-16">
         <div className="bg-white rounded-2xl shadow-lg p-8 w-full max-w-md border-t-4"
@@ -123,13 +108,36 @@ export default function LoginPage() {
 
           <button
             onClick={() => setIsSignUp(!isSignUp)}
-            className="w-full text-sm text-center"
+            className="w-full text-sm text-center mb-2"
             style={{color: '#7B4FA6'}}
           >
             {isSignUp
               ? 'Already have an account? Sign in'
               : "Don't have an account? Sign up"}
           </button>
+
+          {!isSignUp && (
+            <button
+              onClick={async () => {
+                if (!email) {
+                  setError('Please enter your email address first')
+                  return
+                }
+                setLoading(true)
+                const { error } = await supabase.auth.resetPasswordForEmail(
+                  email,
+                  { redirectTo: 'https://www.playmoveimprove.com/reset-password' }
+                )
+                setLoading(false)
+                if (error) setError(error.message)
+                else setMessage('Check your email for a password reset link.')
+              }}
+              className="w-full text-sm text-center"
+              style={{color: '#4a5568'}}
+            >
+              Forgot your password?
+            </button>
+          )}
         </div>
       </div>
     </div>
