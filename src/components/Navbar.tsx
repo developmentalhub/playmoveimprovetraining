@@ -55,10 +55,16 @@ export default function Navbar() {
               >
                 My Library
               </Link>
-              <button
-                onClick={handleSignOut}
+              <Link
+                href="/shop#cart"
                 className="bg-white font-semibold px-4 py-2 rounded-full text-sm shadow"
                 style={{color: '#7B4FA6'}}
+              >
+                Cart
+              </Link>
+              <button
+                onClick={handleSignOut}
+                className="text-white font-semibold px-4 py-2 rounded-full text-sm hover:bg-white hover:bg-opacity-20 transition-all"
               >
                 Sign Out
               </button>

@@ -115,6 +115,24 @@ export default function ShopPage() {
   return (
     <div className="min-h-screen" style={{backgroundColor: '#f8fffe'}}>
 
+    {/* Cart Bar */}
+      <div className="bg-white border-b shadow-sm">
+        <div className="max-w-6xl mx-auto px-6 py-3 flex justify-end">
+          <button
+            onClick={() => setCartOpen(!cartOpen)}
+            className="font-semibold px-5 py-2 rounded-full text-sm shadow border-2"
+            style={{color: '#7B4FA6', borderColor: '#7B4FA6'}}
+          >
+            Cart ({cart.length})
+            {cart.length > 0 && (
+              <span className="ml-2 font-bold">
+                — A${(total / 100).toFixed(2)}
+              </span>
+            )}
+          </button>
+        </div>
+      </div>
+
       {/* Cart Dropdown */}
       {cartOpen && (
         <div className="max-w-6xl mx-auto px-6">
