@@ -10,10 +10,13 @@ const supabase = createClient(
 )
 
 export async function POST(req: NextRequest) {
+  console.log('Checkout route hit')
   try {
     const { cartItems } = await req.json()
+    console.log('Cart items:', JSON.stringify(cartItems))
+    console.log('Stripe key exists:', !!process.env.STRIPE_SECRET_KEY)
+    console.log('Supabase URL:', process.env.NEXT_PUBLIC_SUPABASE_URL)
 
-    // Get the current user from the auth header
     const authHeader = req.headers.get('authorization')
     let userId = null
 
@@ -21,6 +24,7 @@ export async function POST(req: NextRequest) {
       const token = authHeader.replace('Bearer ', '')
       const { data: { user } } = await supabase.auth.getUser(token)
       userId = user?.id
+      console.log('User ID:', userId)
     }
 
     const session = await stripe.checkout.sessions.create({
@@ -48,11 +52,12 @@ export async function POST(req: NextRequest) {
       cancel_url: `${process.env.NEXT_PUBLIC_URL}/shop`,
     })
 
+    console.log('Stripe session created:', session.url)
     return NextResponse.json({ url: session.url })
   } catch (error) {
-    console.error(error)
+    console.error('Checkout error:', error)
     return NextResponse.json(
-      { error: 'Checkout failed' },
+      { error: 'Checkout failed', details: String(error) },
       { status: 500 }
     )
   }
