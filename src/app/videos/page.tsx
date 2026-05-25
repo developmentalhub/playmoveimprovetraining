@@ -319,14 +319,7 @@ export default function VideosPage() {
                     </p>
                   </div>
                   {isMember ? (
-                    <a 
-                    
-                    href={webinar.zoom_url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="px-6 py-2 rounded-full font-semibold text-white"
-                      style={{backgroundColor: '#7B4FA6'}}
-                    >
+                    <a href={webinar.zoom_url} target="_blank" rel="noopener noreferrer" className="px-6 py-2 rounded-full font-semibold text-white" style={{backgroundColor: '#7B4FA6'}}>Join Webinar</a>
                       Join Webinar
                     </a>
                   ) : (
